@@ -211,7 +211,8 @@ if (config.Whether_Production_Settings) {
     // Production Settings
     config.hostname = 'https://apicb.mobilerechargeapp.net';
     // config.hostname = 'http://localhost:11001';
-    config.MongoURL = `mongodb://usersag1more:usersag1more123@dbcb.mobilerechargeapp.net:1234/cpnbazar?replicaSet=cb`;
+    // config.MongoURL = `mongodb://usersag1more:usersag1more123@dbcb.mobilerechargeapp.net:1234/cpnbazar?replicaSet=cb`;
+    config.MongoURL = `mongodb+srv://couponpay:couponpay123@cluster0.dfzce.mongodb.net/buypay?retryWrites=true&w=majority`;
     //config.MongoURL = `mongodb://dogemo:dogemo123@ds329058.mlab.com:29058/dogemo`;
 
     //ports
@@ -248,7 +249,8 @@ if (config.Whether_Production_Settings) {
     config.hostname = 'http://localhost:5001/';
 
     // config.hostname = '	cxapi.mobilerechargeapp.net';
-    config.MongoURL = `mongodb://usersag1more:usersag1more123@dbf.1more.plus:1234/cpnbazar?replicaSet=onemoreplus`;
+    // config.MongoURL = `mongodb://usersag1more:usersag1more123@dbf.1more.plus:1234/cpnbazar?replicaSet=onemoreplus`;
+    config.MongoURL = `mongodb+srv://couponpay:couponpay123@cluster0.dfzce.mongodb.net/buypay_test?retryWrites=true&w=majority`;
 
     //ports
     // config.api_port = 6000;
