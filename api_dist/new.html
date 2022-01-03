@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+    <title>Virtual Payment Client Example</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <style type='text/css'>
+        .myDiv {
+            display: none
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+function ss(){
+
+
+        const queryString = window.location.search;
+
+        const urlParams = new URLSearchParams(queryString);
+
+        var hashParams = window.location.search.substr(1).split('&'); // substr(1) to remove the `#`
+        console.log("26"+ JSON.stringify(hashParams));
+        for (var i = 0; i < hashParams.length; i++) {
+            var p = hashParams[i].split('=');
+            console.log("26"+ p);
+            document.getElementById(p[0]).value = decodeURIComponent(p[1]);;
+
+            if(i==(hashParams.length-1)){
+                console.log("HEro done");
+                fff();
+
+            }
+        }
+    }
+
+    function fff(){
+ $(document).ready(function () { $(function () { $('#SubButL').click(); }); });
+    }
+
+                 </script>
+</head>
+
+<body onload="ss()">
+    <H1>Loading...</H1>
+    <div class="myDiv">
+        <table width='100%' border='2' cellpadding='2' bgcolor='#0074C4'>
+
+        </table>
+        <!-- end branding table -->
+
+
+
+        <!-- The "Pay Now!" button submits the form and gives control to the form 'action' parameter -->
+        <form action="https://secure.oya.co.tz/oyacardpayment/oyaphp/vpc_php_serverhost_do.php" method="post"
+            accept-charset="UTF-8">
+            <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
+
+            <!-- get user input -->
+            <table width="80%" align="center" border="0" cellpadding='0' cellspacing='0'>
+
+                <tr class="shade">
+
+                    <td><input id="virtualPaymentClientURL" name="virtualPaymentClientURL" size="65"
+                            value="https://migs-mtf.mastercard.com.au/vpcpay" maxlength="250" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;
+                        <hr width="75%">&nbsp;</td>
+                </tr>
+                <tr class="title">
+
+                </tr>
+                <tr>
+
+                    <td><input name="vpc_Version" value="1" size="20" maxlength="8" /></td>
+                </tr>
+                <tr class="shade">
+
+                    <td><input name="vpc_Command" value="pay" size="2000" maxlength="16" /></td>
+                </tr>
+                <tr>
+
+                    <td><input id="vpc_AccessCode" name="vpc_AccessCode" value="49F34C3D" size="2000" maxlength="8" /></td>
+                </tr>
+                <tr class="shade">
+
+                    <td><input id="vpc_MerchTxnRef" name="vpc_MerchTxnRef" value="" size="2000" maxlength="2000" /></td>
+                </tr>
+                <tr>
+
+                    <td><input id="vpc_Merchant" name="vpc_Merchant" value="CARDCENTRE01" size="2000" maxlength="16" /></td>
+                </tr>
+
+                <tr class="shade">
+
+                    <td><input id="vpc_OrderInfo" name="vpc_OrderInfo" value="" size="2000" maxlength="2000" /></td>
+                </tr>
+                <tr>
+
+                    <td><input id="vpc_Amount" name="vpc_Amount" value="2000" maxlength="1000" /></td>
+                </tr>
+                <tr class="shade">
+
+                    <td><input id="vpc_ReturnURL" name="vpc_ReturnURL" size="2500" value="https://api.oya.co.tz/mobileMoney/callback"
+                            maxlength="2500" /></td>
+                </tr>
+                <tr>
+
+                    <td><select name="vpc_Locale">
+                            <option SELECTED>en_AU</option>
+                            <option>en_AU</option>
+                        </select></td>
+                </tr>
+                <tr class="shade">
+
+                    <td><select name="vpc_Currency">
+                            <option SELECTED>USD</option>
+                        </select></td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+
+                    <td><input id="SubButL" type="submit" NAME="SubButL" value="Pay Now!"></td>
+                </tr>
+                <tr>
+
+
+
+                <tr>
+
+                </tr>
+
+            </table>
+
+        </form>
+    </div>
+</body>
+
+<head>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+</head>
+
+</html>
