@@ -11,6 +11,7 @@
     "Express"
   ],
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "async": "^2.6.2",
     "aws-sdk": "^2.650.0",
     "axios": "^0.18.0",

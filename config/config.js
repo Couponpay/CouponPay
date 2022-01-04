@@ -71,17 +71,25 @@ config.Purchase_Wallet_Amount_Request_Share_Percent = 80;
 // config.S3URL = "https://s3-us-west-2.amazonaws.com/ncevo/";
 
 config.S3Region = "ap-south-1";
-config.S3AccessKey = "AKIATQR42DYPEDH5DQFX";
-config.S3Secret = "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";
-config.S3Bucket = "cbsagiam";
-config.S3URL = "https://cbsagiam.s3.ap-south-1.amazonaws.com/"
+config.S3AccessKey = "AKIAZKTFPMWYMRDVACPW";
+config.S3Secret = "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";
+config.S3Bucket = "buypaycontrol";
+config.S3URL = "https://buypaycontrol.s3.ap-south-1.amazonaws.com/"
+
+// config.AWS = {
+//     S3Region: "ap-south-1",
+//     S3AccessKey: "AKIATQR42DYPEDH5DQFX",  // Studentx
+//     S3Secret: "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",
+//     S3Bucket: "cbsagiam",
+//     S3URL: "https://cbsagiam.s3.ap-south-1.amazonaws.com/"
+// };
 
 config.AWS = {
     S3Region: "ap-south-1",
-    S3AccessKey: "AKIATQR42DYPEDH5DQFX",  // Studentx
-    S3Secret: "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",
-    S3Bucket: "cbsagiam",
-    S3URL: "https://cbsagiam.s3.ap-south-1.amazonaws.com/"
+    S3AccessKey: "AKIAZKTFPMWYMRDVACPW",  // Studentx
+    S3Secret: "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",
+    S3Bucket: "buypaycontrol",
+    S3URL: "https://buypaycontrol.s3.ap-south-1.amazonaws.com/"
 };
 
 // //MSG91 Credentials
@@ -205,7 +213,7 @@ config.Take_Date_Format_Order = 'YYYYMMDD';
  * 
  * **********************************************************/
 
-config.Whether_Production_Settings = true;
+config.Whether_Production_Settings = false;
 
 if (config.Whether_Production_Settings) {
     // Production Settings
