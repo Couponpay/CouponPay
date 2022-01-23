@@ -43,10 +43,10 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.7",
-    "@babel/core": "^7.16.7",
-    "@babel/node": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
     "nodemon": "^1.18.10"
   },
   "author": "Jagadish Pampana <jagadesh@eontex.com>",

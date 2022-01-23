@@ -246,8 +246,8 @@ if (config.Whether_Production_Settings) {
         host: "api.razorpay.com/v1",
         baseURL: "https://api.razorpay.com/v1",
         merchant_id: "90ry5yGtvC1t87",
-        key_id: "rzp_test_FIzHP8BxeZ6fQP",
-        key_secret: "LJIWIIMt0rULsnflpzVCnSxx",
+        key_id: "rzp_test_xZ9pwPGyzxDR21",
+        key_secret: "YyVSrHS92sYj97DaqNgGdGoq",
         razorpayx_account_number: "7878780043771557",
         webhook_secret: "indian153"
     }
