@@ -240,10 +240,10 @@ ShopController.Get_Upgrade_Box_Product = (values, BuyerData) => {
                 };
                 let PD_Result = await Buyer_Box_Product_Purchased_Logs.findOne(PD_query).lean();
                 if (PD_Result != null) {
-                    Buyer_Purchased_Product = false
+                    Buyer_Purchased_Product = true
 
                 } else {
-
+                    Buyer_Purchased_Product = false
                 }
                 let query = {
                     Status: true
@@ -262,6 +262,11 @@ ShopController.Get_Upgrade_Box_Product = (values, BuyerData) => {
                     resolve({ success: true, extras: { Data: Result, Buyer_Purchased_Product: Buyer_Purchased_Product } });
                     console.log("192")
 
+                }
+                else {
+                    console.log("Buyer_Purchased_Product" + Buyer_Purchased_Product )
+                    resolve({ success: true, extras: { Data: {}, Buyer_Purchased_Product: Buyer_Purchased_Product } });
+                
                 }
                 console.log("195")
 
@@ -2855,8 +2860,10 @@ ShopController.Buyer_Wallet_Logs = (values, BuyerData) => {
                     Time: -1
                 };
 
-                console.time();
-                console.log("2859")
+                var start = new Date();
+                var hrstart = process.hrtime();
+
+
 
                 if (values.sortOptions != null && Object.keys(values.sortOptions).length > 0) {
                     console.log("2740---->" + JSON.stringify(values))
@@ -2870,39 +2877,49 @@ ShopController.Buyer_Wallet_Logs = (values, BuyerData) => {
                 switch (+(values.Logs_Type)) {
                     //main wallet
                     case 1:
-                        console.time();
-                        console.log("2874")
+                         var end = new Date() - start,
+                         hrend = process.hrtime(hrstart);    
                         Count = await Buyer_Share_Logs.countDocuments(query).lean().exec();
                         Result = await Buyer_Share_Logs.find(query).select('-_id -__v -updated_at -Point -Geometry -Delivery_Pricings -PasswordHash -PasswordSalt -SessionID').sort(sortOptions).lean().skip(toSkip).limit(toLimit).exec();
+                        console.info("Execution time: %dms", end);
+                        console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
                         break;
                     //Purchase wallet
                     case 2:
-                        console.time();
-                        console.log("2881")
+                        var end = new Date() - start,
+                        hrend = process.hrtime(hrstart);
                         Count = await Buyer_Purchase_Wallet_Logs.countDocuments(query).lean().exec();
                         Result = await Buyer_Purchase_Wallet_Logs.find(query).select('-_id -__v -updated_at -Point -Geometry -Delivery_Pricings -PasswordHash -PasswordSalt -SessionID').sort(sortOptions).lean().skip(toSkip).limit(toLimit).exec();
+                        console.info("Execution time: %dms", end);
+                        console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
                         //  
                         break;
                     //Gift Wallet   
                     case 3:
-                        console.time();
-                        console.log("2889")
+                        var end = new Date() - start,
+                         hrend = process.hrtime(hrstart);
                         Count = await Buyer_Gift_Amount_WithDrawn_Logs.countDocuments(query).lean().exec();
                         Result = await Buyer_Gift_Amount_WithDrawn_Logs.find(query).select('-_id -__v -updated_at -Point -Geometry -Delivery_Pricings -PasswordHash -PasswordSalt -SessionID').sort(sortOptions).lean().skip(toSkip).limit(toLimit).exec();
+                        console.info("Execution time: %dms", end);
+                        console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
                         break;
                     //Update coupons Wallet   
                     case 4:
-                        console.time();
-                        console.log("2896")
+                        var end = new Date() - start,
+                         hrend = process.hrtime(hrstart);
                         Count = await Buyer_Update_Coupons_Wallet_Logs.countDocuments(query).lean().exec();
                         Result = await Buyer_Update_Coupons_Wallet_Logs.find(query).select('-_id -__v -updated_at -Point -Geometry -Delivery_Pricings -PasswordHash -PasswordSalt -SessionID').sort(sortOptions).lean().skip(toSkip).limit(toLimit).exec();
+                        console.info("Execution time: %dms", end);
+                        console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
                         break;
                     //Expire Wallet    
                     case 5:
-                        console.time();
-                        console.log("2903")
+                        var end = new Date() - start,
+                         hrend = process.hrtime(hrstart);
                         Count = await Buyer_Expired_Amount_Wallet_Logs.countDocuments(query).lean().exec();
                         Result = await Buyer_Expired_Amount_Wallet_Logs.find(query).select('-_id -__v -updated_at -Point -Geometry -Delivery_Pricings -PasswordHash -PasswordSalt -SessionID').sort(sortOptions).lean().skip(toSkip).limit(toLimit).exec();
+                        console.info("Execution time: %dms", end);
+                        console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
                         break;
                 }
                 //  
@@ -3253,6 +3270,7 @@ ShopController.User_Shops_Request_ShareAmount_2 = (values, BuyerData, ShopData) 
                         Remaining_Cash_Amount: Remaining_Pay_Amount
                     }
                     let calbk;
+                    console.log("3268-->"+JSON.stringify(Remaining_Pay_Amount))
                     if (parseInt(Remaining_Pay_Amount) == 0) {
                         calbk = false;
                         // Payment_Type = 1
@@ -3290,7 +3308,7 @@ ShopController.User_Shops_Request_ShareAmount_2 = (values, BuyerData, ShopData) 
                         updated_at: new Date()
                     }
 
-                   // calbk = false
+                    calbk = false
                     let ResultData = {
                         Buyer_Shop_request_ID: RequestData.Buyer_Shop_request_ID,
                         Users_ShopsID: RequestData.Users_ShopsID,

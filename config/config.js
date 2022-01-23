@@ -108,14 +108,23 @@ config.AWS = {
 // }
 
 
+// config.msg91 = {
+//     "host": "http://control.msg91.com/api/",
+//     "authkey": "353785AdboEgarbV602151f6P1",
+//     "sender_id": "ONEMOR",
+//     "route_no": "4",
+//     "otp_template_id": "606afba78f0f9f7d9968673a",
+//     "baseURL": 'https://api.msg91.com/api'
+
+// }
+
 config.msg91 = {
     "host": "http://control.msg91.com/api/",
-    "authkey": "353785AdboEgarbV602151f6P1",
-    "sender_id": "ONEMOR",
+    "authkey": "265241Af3zaNVuJVDq61ed4b8fP1",
+    "sender_id": "BUYPAY",
     "route_no": "4",
-    "otp_template_id": "606afba78f0f9f7d9968673a",
+    "otp_template_id": "61ed4c7190c7fc0571039292",
     "baseURL": 'https://api.msg91.com/api'
-
 }
 
 //ShipRocket 

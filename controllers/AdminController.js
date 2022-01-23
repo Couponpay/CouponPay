@@ -1987,7 +1987,7 @@ AdminController.List_My_BuyerShare_Requests = (values, BuyerData) => {
                     // Request_Status: values.Status,  //1.pending 2.cancelled 3.Approved 
                     Buyer_Payment_Status: 3
                 };
-                
+                console.log("1991---> " +JSON.stringify(query))
                 let Count = await Buyer_Shop_requests_Notification.countDocuments(query).lean().exec();
                 let Result = await Buyer_Shop_requests_Notification.find(query).select('').sort(sortOptions).lean().skip(toSkip).limit(toLimit).exec();
                 console.log("1808 -- new count ")

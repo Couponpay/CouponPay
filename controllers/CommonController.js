@@ -49,6 +49,8 @@ import District from "../models/District"
 import Orders from "../models/Orders"
 
 import Order_Otp from "../models/Order_Otp"
+import Buyer_Wallet_Logs from "../models/Buyer_Wallet_Logs"
+import User_Transfer_Money_Requests from "../models/User_Transfer_Money_Requests"
 
 CommonController.Check_for_Box_Product = values => {
     return new Promise((resolve, reject) => {
@@ -1026,6 +1028,29 @@ CommonController.Check_for_Api_Key = (values) => {
     });
 }
 
+
+CommonController.Check_Phone_Number = (values) => {
+    console.log(values)
+    return new Promise((resolve, reject) => {
+        setImmediate(async () => {
+            try {
+                    let query = {
+                        Buyer_PhoneNumber: values.PhoneNumber
+                    };
+                    let Result = await Buyers.findOne(query).lean();
+                    if (Result == null) {
+                        reject({ success: false, extras: { msg: ApiMessages.INVALID_PHONE_NUMBER } })
+                } else {
+                        resolve(Result);
+                    }
+
+            } catch (error) {
+                reject(await CommonController.Common_Error_Handler(error));
+            }
+        });
+    });
+}
+
 CommonController.Common_Find_Default_SMS_Provider = () => {
     return new Promise((resolve, reject) => {
         setImmediate(async () => {
@@ -1811,4 +1836,65 @@ CommonController.Check_For_Buyer_Session_State_Purchase = (values) => {
     });
 }
 
+
+CommonController.Receive_Amount_From_DHWallet = (values,FriendData,UserData) => {
+    return new Promise((resolve, reject) => {
+        setImmediate(async () => {
+            try {
+                let Amount = parseFloat(values.Amount);
+                if (Amount <= UserData.User_Amounts.Available_Amount) {
+                  //  let After_Commissioned_Amount = ((Amount * config.Friend_Money_Transfer_After_Commissioned) / 100);
+                   
+
+                    let FData = {
+                        Buyer_PhoneNumber:values.PhoneNumber,
+                       // LogID: uuid.v4(),
+                        //USERID: FriendData.USERID,
+                        //Type: 12,
+                        Amount: Amount
+                        //Data: {
+                          //  UserData: UserData,
+                            //FriendData: FriendData,
+                           // After_Commissioned_Amount: After_Commissioned_Amount
+                        }
+                        Time: new Date()
+                    
+                    let FSaveResult = await Buyer_Wallet_Logs(FData).save();
+                    let Ffndupdquery = {
+                        USERID: FriendData.USERID
+                    };
+                    let Ffndupdchanges = {
+                        $set: {
+                            updated_at: new Date()
+                        },
+                        $inc: {
+                            "User_Amounts.Available_Amount": Amount,
+                            "User_Amounts.Total_Amount": Amount,
+                        }
+                    };
+                    let Ffndupdoptions = {
+                        upsert: true,
+                        setDefaultsOnInsert: true,
+                        new: true
+                    };
+                    let FfindupdateData = await Buyers.findOneAndUpdate(Ffndupdquery, Ffndupdchanges, Ffndupdoptions).select('-_id -__v').lean();
+                    let Data = {
+                        USERID: FriendData.USERID,
+                        Amount: Amount,
+                       // After_Commissioned_Amount: After_Commissioned_Amount,
+                        REQUEST_DETAILS: UserData,
+                        created_at: new Date(),
+                        updated_at: new Date()
+                    }
+                    let SaveResult = await User_Transfer_Money_Requests(Data).save();
+                    resolve({ success: true, extras: { Status: "Money Transferred and Requested in Cash Successfully" } })
+                } else {
+                    reject({ success: false, extras: { msg: ApiMessages.INSUFFICIENT_BALANCE } })
+                }
+            } catch (error) {
+                reject(await CommonController.Common_Error_Handler(error));
+            }
+        });
+    });
+}
 export default CommonController;

@@ -1,4 +1,6 @@
 import express from "express";
+import CommonController from "../controllers/CommonController";
+import AdminMediator from "../mediators/AdminMediator";
 import DeviceMediator from "../mediators/DeviceMediator";
 import ShopMediator from "../mediators/ShopMediator";
 
@@ -115,6 +117,7 @@ router.post('/Get_Product_Details_For_Buyer', ShopMediator.Get_Product_Details_F
 router.post('/Get_Product_Details', ShopMediator.Get_Product_Details);
 
 router.post('/Get_Product_Details_For_Shop', ShopMediator.Get_Product_Details_For_Shop);
+
 
 
 router.post('/Add_Buyer_Beneficiary_Account_For_Bank_Account', ShopMediator.Add_Buyer_Beneficiary_Account_For_Bank_Account);
@@ -249,5 +252,13 @@ router.post('/Purchase_District', ShopMediator.Purchase_District);
 
 
 router.post('/List_All_Pincodes_For_Place_order', ShopMediator.List_All_Pincodes_For_Placeorder);
+
+router.post('/Check_Phone_Number', ShopMediator.Check_Phone_Number);
+
+router.post('Recieve_Amount_From_DHWallet',ShopMediator.Receive_Amount_From_DHWallet);
+
+
+
+
 
 export default router;

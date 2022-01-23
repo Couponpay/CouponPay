@@ -8,6 +8,7 @@ import AdminController from "../controllers/AdminController";
 
 ShopMediator.Get_My_Box_Buyers_Data = async (req, res) => {
     try {
+
         if (
             req.body.ApiKey != null
             && req.body.BuyerID != null && req.body.BuyerID != ""
@@ -490,6 +491,7 @@ ShopMediator.Accept_Reject_BuyerShare_Requests = async (req, res) => {
 
 ShopMediator.List_My_BuyerShare_Requests = async (req, res) => {
     try {
+        console.log("494--->" + JSON.stringify(req.body))
         if (
             req.body.ApiKey != null
             && req.body.BuyerID != null && req.body.SessionID != null
@@ -1087,6 +1089,28 @@ ShopMediator.Validate_Referral_Phone_Number = async (req, res) => {
         }
     }
 }
+
+
+ShopMediator.Check_Phone_Number = async (req, res) => {
+    try {
+        if (
+           req.body.PhoneNumber != null && req.body.PhoneNumber != ''
+        ) {
+
+            let Result = await CommonController.Check_Phone_Number(req.body);
+           
+
+            res.json({ success: true, extras: { Data: Result } });
+        } else {
+            throw { success: false, extras: { msg: ApiMessages.ENTER_ALL_TAGS } };
+        }
+    } catch (error) {
+        if (!res.headersSent) {
+            res.json(error);
+        }
+    }
+}
+
 
 ShopMediator.Generate_ShopOTP_For_Buyer_Order = async (req, res) => {
     try {
@@ -2702,6 +2726,7 @@ ShopMediator.Purchase_State = async (req, res) => {
         res.json(error);
     }
 }
+
 ShopMediator.Purchase_District = async (req, res) => {
     try {
         let values = JSON.parse(JSON.stringify(req.body));
@@ -2733,5 +2758,30 @@ ShopMediator.Purchase_District = async (req, res) => {
         res.json(error);
     }
 }
+
+
+
+ShopMediator.Receive_Amount_From_DHWallet = async (req, res) => {
+    try {
+        if (
+             req.body.PhoneNumber != null && req.body.PhoneNumber != '' && req.body.Amount != null
+        ) {
+            let PhoneNumber = await CommonController.Check_Phone_Number(req.body);
+            let RecieveAmount = await CommonController.Receive_Amount_From_DHWallet(req.body,PhoneNumber);
+            
+            
+           //let Result = await UserController.Transfer_Wallet(req.body);
+            res.json(RecieveAmount);
+        } else {
+            throw { success: false, extras: { msg: ApiMessages.ENTER_ALL_TAGS } };
+        }
+    } catch (error) {
+        if (!res.headersSent) {
+            res.json(error);
+        }
+    }
+}
+
+
 
 export default ShopMediator;

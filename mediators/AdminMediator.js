@@ -77,6 +77,7 @@ AdminMediator.List_With_Draw_Gift_Amount_Requests = async (req, res) => {
     }
 }
 
+
 AdminMediator.Buyer_Purchase_Logs = async (req, res) => {
     try {
         if (
@@ -727,6 +728,7 @@ AdminMediator.Add_Coupons_Category = async (req, res) => {
         }
     }
 }
+
 
 AdminMediator.List_All_App_Image_Resource = async (req, res) => {
     try {

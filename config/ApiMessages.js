@@ -119,5 +119,6 @@ ApiMessages.INVALID_DISTRICT = 114
 ApiMessages.INVALID_PINCODENUMBER = 115
 ApiMessages.PINCODE_REJECTED = 116
 ApiMessages.NO_ORDER_DATA = 117
+ApiMessages.INVALID_PHONE_NUMBER = 118
 
 export default ApiMessages;
